@@ -5,7 +5,10 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
   };
 
-  outputs = {nixpkgs, ...}: let
+  outputs = {
+    nixpkgs,
+    ...
+  }: let
     forAllSystems = nixpkgs.lib.genAttrs ["x86_64-linux" "aarch64-linux" "x86_64-darwin" "aarch64-darwin"];
   in {
     devShells = forAllSystems (system: let
@@ -13,10 +16,11 @@
     in {
       default = pkgs.mkShell {
         packages = with pkgs; [
-          go
-          gopls
-          go-tools
-          delve
+          cargo
+          clippy
+          rust-analyzer
+          rustc
+          rustfmt
         ];
       };
     });

@@ -3,10 +3,14 @@ use std::fmt::Display;
 #[derive(Debug)]
 pub enum Status<T> {
     Unsolved,
-    Solved(T),
+    Solving(T),
+    Solved(T, T),
 }
 
-pub trait Day {
+pub trait Day
+where
+    Self::Output: PartialEq,
+{
     const NUMBER: u8;
     const TITLE: &'static str;
     const INPUT: &'static str;
@@ -32,11 +36,16 @@ where
 {
     println!("Day {} \"{}\":", D::NUMBER, D::TITLE);
 
-    let status_to_string = |status| match status {
-        Status::Solved(result) => {
-            format!("Solved! ({})", result)
+    let status_to_string = |status: Status<D::Output>| match status {
+        Status::Unsolved => "❔".to_string(),
+        Status::Solving(result) => format!("⏳ (guess: {})", result),
+        Status::Solved(guess, answer) => {
+            if guess == answer {
+                format!("✅ (answer: {answer})")
+            } else {
+                format!("❌ (guess: {guess}; answer: {answer})")
+            }
         }
-        Status::Unsolved => "Unsolved".to_string(),
     };
 
     let input = D::parse(D::INPUT);

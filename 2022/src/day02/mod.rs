@@ -98,7 +98,7 @@ impl Day for Day02 {
             total_score += *our as usize + outcome as usize;
         }
 
-        Status::Solved(total_score)
+        Status::Solved(total_score, 9241)
     }
 
     fn part2(input: &Self::Input) -> Status<Self::Output> {
@@ -108,6 +108,6 @@ impl Day for Day02 {
             total_score += our as usize + *want as usize;
         }
 
-        Status::Solved(total_score)
+        Status::Solved(total_score, 14610)
     }
 }

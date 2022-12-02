@@ -27,10 +27,10 @@ impl Day for Day01 {
     }
 
     fn part1(input: &Self::Input) -> Status<Self::Output> {
-        Status::Solved(*input.iter().max().unwrap())
+        Status::Solved(*input.iter().max().unwrap(), 71502)
     }
 
     fn part2(input: &Self::Input) -> Status<Self::Output> {
-        Status::Solved(input.iter().take(3).sum())
+        Status::Solved(input.iter().take(3).sum(), 208191)
     }
 }

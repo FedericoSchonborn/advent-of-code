@@ -10,16 +10,12 @@ impl Day for Day01 {
     type Output = usize;
 
     fn parse(raw: &'static str) -> Self::Input {
-        let elves = raw.split("\n\n").collect::<Vec<_>>();
-
+        // TODO: This could definitely use more iterators.
         let mut totals = vec![];
-        for elf in elves {
-            let items = elf.split('\n').collect::<Vec<_>>();
-
+        for elf in raw.trim().split("\n\n") {
             let mut total = 0;
-            for item in items {
-                let calories = item.parse::<usize>().unwrap();
-                total += calories
+            for item in elf.split('\n') {
+                total += item.parse::<usize>().unwrap()
             }
 
             totals.push(total);

@@ -32,7 +32,7 @@ impl Day for Day03 {
     }
 
     // TODO: This is bad.
-    fn part1(input: &Self::Input) -> aoc::Status<Self::Output> {
+    fn part1(input: &Self::Input) -> Status<Self::Output> {
         let mut repeated = vec![];
         for (_, first, second) in input {
             let mut chars = HashMap::new();
@@ -55,5 +55,16 @@ impl Day for Day03 {
         }
 
         Status::Solved(repeated.iter().sum(), 7878)
+    }
+
+    fn part2(_input: &Self::Input) -> Status<Self::Output> {
+        let lines = Self::INPUT.lines().collect::<Vec<_>>();
+
+        let mut groups = vec![];
+        for n in (0..lines.len()).step_by(3) {
+            groups.push((lines[n], lines[n + 1], lines[n + 2]));
+        }
+
+        Status::Unsolved
     }
 }
